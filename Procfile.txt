@@ -1,1 +1,0 @@
-worker: python Electronic_Diary_Telegram_Bot_Project.py
