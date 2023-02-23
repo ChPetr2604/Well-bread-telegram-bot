@@ -1,7 +1,6 @@
 import telebot
 from telebot import types
-import sqlite3
-import time
+import psycopg2
 from email_validator import validate_email, EmailNotValidError
 from pytz import timezone
 import datetime
@@ -50,7 +49,7 @@ alt_timetable = {
     "lesson_8": [datetime.time(15, 20), datetime.time(16, 0)],
 }
 rus_list = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я']
-con = sqlite3.connect('timetable.db', check_same_thread=False)
+con = psycopg2.connect(config['database_url'], sslmode="require")
 cur = con.cursor()
 a = []
 
