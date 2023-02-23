@@ -1,3 +1,3 @@
 config = {
-    'token': '6084821255:AAGFB1o2ve50QO8E63dMqM0owqrMhxRJkl8'
+    'token': '6084821255:AAGkAi3Z0zqQ6co8BtnhaoqBh8g4MfpYJyA'
 }
