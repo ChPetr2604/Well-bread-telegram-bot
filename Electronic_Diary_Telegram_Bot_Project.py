@@ -112,21 +112,21 @@ def daily_answer(message):
                     our_bot.send_message(message.chat.id, f'Ваш класс: {cls_nbr}')
                     if i != 'lesson_8':
                         cur.execute(
-                            f'''SELECT {i} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                            f"""SELECT {i} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                         now_lesson = cur.fetchone()[0]
                         our_bot.send_message(message.chat.id, f'Сейчас урок: {now_lesson}')
                         cur.execute(
-                            f'''SELECT {i.split('_')[0] + '_' + str(int(i.split('_')[1]) + 1)} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                            f"""SELECT {i.split('_')[0] + '_' + str(int(i.split('_')[1]) + 1)} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                         next_lesson = cur.fetchone()[0]
                         our_bot.send_message(message.chat.id, f"Следующий урок: {next_lesson}")
                     else:
                         cur.execute(
-                            f'''SELECT {i} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                            f"""SELECT {i} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                         now_lesson = cur.fetchone()[0]
                         our_bot.send_message(message.chat.id, f'Сейчас урок: {now_lesson}')
                 elif time2 > k and time2 < j[0]:
                     cur.execute(
-                        f'''SELECT {i} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                        f"""SELECT {i} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                     next_lesson = cur.fetchone()[0]
                     our_bot.send_message(message.chat.id, "Перемена!")
                     our_bot.send_message(message.chat.id, f'Ваш класс: {cls_nbr}')
@@ -138,21 +138,21 @@ def daily_answer(message):
                     our_bot.send_message(message.chat.id, f'Ваш класс: {cls_nbr}')
                     if i != 'lesson_8':
                         cur.execute(
-                            f'''SELECT {i} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                            f"""SELECT {i} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                         now_lesson = cur.fetchone()[0]
                         our_bot.send_message(message.chat.id, f'Сейчас урок: {now_lesson}')
                         cur.execute(
-                            f'''SELECT {i.split('_')[0] + '_' + str(int(i.split('_')[1]) + 1)} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                            f"""SELECT {i.split('_')[0] + '_' + str(int(i.split('_')[1]) + 1)} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                         next_lesson = cur.fetchone()[0]
                         our_bot.send_message(message.chat.id, f"Следующий урок: {next_lesson}")
                     else:
                         cur.execute(
-                            f'''SELECT {i} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                            f"""SELECT {i} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                         now_lesson = cur.fetchone()[0]
                         our_bot.send_message(message.chat.id, f'Сейчас урок: {now_lesson}')
                 elif time2 > k and time2 < j[0]:
                     cur.execute(
-                        f'''SELECT {i} FROM all_class WHERE number_of_class = "{cls_nbr}" AND Day = "{date}"''')
+                        f"""SELECT {i} FROM all_class WHERE number_of_class = '{cls_nbr}' AND Day = '{date}'""")
                     next_lesson = cur.fetchone()[0]
                     our_bot.send_message(message.chat.id, "Перемена!")
                     our_bot.send_message(message.chat.id, f'Ваш класс: {cls_nbr}')
@@ -193,6 +193,7 @@ def email_answer(message, lst):
         us_id = message.from_user.id
         lst.append(us_id)
         lst.append(mail)
+        print(lst)
         our_bot.send_message(message.chat.id, "Отлично! Осталось совсем чуть-чуть и я смогу тебе помогать)")
         msg = our_bot.send_message(message.chat.id, "Теперь мне необходим пароль от твоего аккаунта")
         our_bot.register_next_step_handler(msg, check_pswd, lst)
@@ -205,6 +206,7 @@ def email_answer(message, lst):
 def check_pswd(message, lst):
     password = message.text
     lst.append(password)
+    print(lst)
     our_bot.send_message(message.chat.id, "Наша команда не знает твоего пароля, так что пусть пока что он будет таким, если он не подойдет к электронному дневнику потом - мы сообщим")
     msg = our_bot.send_message(message.chat.id, "Теперь введи номер и букву своего класса в формате как в примере:10 А")
     our_bot.register_next_step_handler(msg, check_cls, lst)
@@ -218,6 +220,7 @@ def check_cls(message, lst):
             if cls.split()[1] in rus_list:
                 clas_check_passed = True
                 lst.append(cls)
+                print(lst)
                 cur.execute(f"""INSERT INTO info VALUES ({lst[0]}, '{lst[1]}', '{lst[2]}', '{lst[3]}')""")
                 con.commit()
                 lst = []
