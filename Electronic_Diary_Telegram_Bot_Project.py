@@ -11,7 +11,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 token = config['token']
-our_bot = telebot.TeleBot('6210410892:AAFHvIkafuECqgUjE4Jw9WgT0FWOt-d52Po')
+our_bot = telebot.TeleBot(token)
 week_days = {
     0: '1_Monday',
     1: '2_Tuesday',
@@ -53,7 +53,7 @@ alt_timetable = {
 }
 rus_list = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У',
             'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я']
-con = psycopg2.connect("postgresql://postgres:J1p7qDxnRtuvDYIW3EQq@containers-us-west-198.railway.app:7375/railway", sslmode="require")
+con = psycopg2.connect(config['database_url'], sslmode="require")
 cur = con.cursor()
 
 
